@@ -9,21 +9,23 @@
       </ul>
     </div>
     <!-- Modal Component -->
-    <b-modal >
-      <!-- <form @submit.stop.prevent="handleSubmit">
-        <b-form-input type="text"
-                      placeholder="Enter your name"
-                      v-model="name"></b-form-input>
-        <b-form-input type="text"
-                      placeholder="Enter your email"
-                      v-model="email"></b-form-input>
-      </form> -->
-      <form action="https://xyz.us7.list-manage.com/subscribe/post" method="POST">
+    <b-modal id="modalPrevent"
+             ref="modal"
+             @ok="handleOk"
+             :title="title"
+             @shown="clearName">
+      <form @submit.stop.prevent="handleSubmit" method="POST">
+        <b-form-input hidden name="u" value="fb66abc77bce32858a9bdf813"></b-form-input>
+        <b-form-input hidden name="id" value="67afc8c3d2"></b-form-input>
+        <b-form-input name="MERGE1" id="MERGE1" size="25" value="" type="text" placeholder="Enter your name" v-model="name"></b-form-input>
+        <b-form-input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value="" placeholder="Enter your email" v-model="email"></b-form-input>
+      </form>
+      <!-- <form action="https://xyz.us7.list-manage.com/subscribe/post" method="POST">
       <input type="hidden" name="u" value="fb66abc77bce32858a9bdf813">
       <input type="hidden" name="id" value="67afc8c3d2">
       <input type="text" name="MERGE1" id="MERGE1" size="25" value="">
       <input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value="">
-      </form>
+      </form> -->
     </b-modal>
   </div>
 </template>
@@ -33,14 +35,13 @@ export default {
   data () {
     return {
       name: '',
+      email: '',
       names: [],
       title: 'Like to follow updates with Ludio?'
     }
   },
+  
   methods: {
-    clearName () {
-      this.name = ''
-    },
     handleOk (evt) {
       // Prevent modal from closing
       evt.preventDefault()
@@ -50,11 +51,27 @@ export default {
         this.handleSubmit()
       }
     },
+    clearName(){},
     handleSubmit () {
       this.names.push(this.name)
-      this.clearName()
-      this.title = ''
-      // this.$refs.modal.hide()
+      // POST /someUrl
+  this.$http.post('https://xyz.us7.list-manage.com/subscribe/post', {foo: 'bar'}).then(response => {
+
+    // get status
+    response.status;
+
+    // get status text
+    response.statusText;
+
+    // get 'Expires' header
+    response.headers.get('Expires');
+
+    // get body data
+    this.someData = response.body;
+
+  }, response => {
+    // error callback
+  });
     }
   }
 }
