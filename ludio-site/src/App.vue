@@ -16,7 +16,7 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
-import '/Users/harrydifolco/ludio/ludio-site/static/bootstrap.min.css';
+import '/Users/harrydifolco/ludio-site/ludio-site/static/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
